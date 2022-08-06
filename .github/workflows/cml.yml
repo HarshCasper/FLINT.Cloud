@@ -58,9 +58,8 @@ jobs:
         env:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-         pip install matplotlib
-         pip install pandas
          cd local/rest_api_gcbm
+         tree
          python3 annual_summaries.py
          echo "# GCBM Model" > report.md
          echo "## Total Biomass Curve" >> report.md
