@@ -16,4 +16,6 @@ query = f"""
 
 df = pd.read_sql_query(query, conn)
 ax = df.plot.line("year")  # x-axis
+print("starting to save")
 ax.figure.savefig("tests/output/total_biomass_mt.png", dpi=300)
+print("finished")
