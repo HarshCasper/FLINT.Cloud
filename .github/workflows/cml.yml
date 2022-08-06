@@ -23,21 +23,24 @@ jobs:
         id: run_moja_cli
         run: |
           apt-get update && apt-get install unzip tree
-          cd local/rest_api_gcbm/tests/
+          pushd local/rest_api_gcbm/tests/
           unzip linux-demo.zip
           cd config/
           tree
           /opt/gcbm/moja.cli --config_file gcbm_config.cfg --config_provider provider_config.json
+          popd
+          cd local/rest_api_gcbm
+          mkdir GCBM.CompileResults
           
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
           repository: moja-global/GCBM.CompileResults
-          path: local/rest_api_gcbm
+          path: local/rest_api_gcbm/GCBM.CompileResults
           
       - name: Compile results
         run: |
           cd local/rest_api_gcbm
           tree
-          python3 compileresults.py sqlite:///tests/output/gcbm_output.db --output_db sqlite:///tests/output/compiled_simulation_output.db
+          python3 GCBM.CompileResults/compileresults.py sqlite:///tests/output/gcbm_output.db --output_db sqlite:///tests/output/compiled_simulation_output.db
           
