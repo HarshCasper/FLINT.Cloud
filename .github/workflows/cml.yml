@@ -38,5 +38,6 @@ jobs:
       - name: Compile results
         run: |
           cd local/rest_api_gcbm
-          python3 GCBM.CompileResults/compileresults.py sqlite:///tests/output/gcbm_output.db --output_db sqlite:///tests/output/compiled_simulation_output.db
+          tree
+          python3 compileresults.py sqlite:///tests/output/gcbm_output.db --output_db sqlite:///tests/output/compiled_simulation_output.db
           
