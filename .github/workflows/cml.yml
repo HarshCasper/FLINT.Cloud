@@ -44,3 +44,21 @@ jobs:
           tree
           python3 GCBM.CompileResults/compileresults.py sqlite:///tests/output/gcbm_output.db --output_db sqlite:///tests/output/compiled_simulation_output.db
           
+      - name: Yo
+        run: pip3 install pandas matplotlib
+        
+      - name: Setup CML
+        uses: iterative/setup-cml@v1
+        
+      - name: Send the report
+        env:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+         pip install matplotlib
+         pip install pandas
+         cd local/rest_api_gcbm
+         python3 annual_summaries.py
+         echo "# GCBM Model" > report.md
+         echo "## Total Biomass Curve" >> report.md
+         cml-publish output/total_biomass_mt.png --md >> report.md
+         cml-send-comment report.md 
