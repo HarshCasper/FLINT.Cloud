@@ -19,6 +19,10 @@ jobs:
         with:
           ref: test-cml
           
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          
       - name: Run Moja CLI
         id: run_moja_cli
         run: |
